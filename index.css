@@ -2,6 +2,7 @@
   --background-color: black;
   --box-shadow: rgba(0,255,208,0.7);
   --text-color:white;
+  --box-shadow-color: rgb(0,255,208)
 }
 
 *{
@@ -54,7 +55,7 @@ body{
   align-items: center;
   height: 25vh;
   background-color: var(--background-color);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 30vh;
   right: 0;
@@ -64,15 +65,43 @@ body{
 
 .user-container{
   display: flex;
-  width: 150px;
-  height: 50%;
+  width: 120px;
+  height: 60px;
   justify-content: space-evenly;
   box-shadow: 4px 4px 10px var(--box-shadow);
   border-radius: 10px;
-  padding: 1em;
+  padding: 0.2em;
+  
 }
 
 .user-name{
   font-size: 1.6rem;
   align-self: center;
+}
+
+.stat-container{
+  display: flex;
+  position: absolute;
+  font-size: 2rem;
+  top: 30vh;
+  left: 10vw;
+  right: 10vw;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.score-container{
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+  background-color: var(--background-color);
+  padding: 10px;
+  border-radius: 50px;
+  box-shadow: 2px 2px 5px var(--box-shadow);
+}
+.timer{
+  padding-left: 30px;
+  padding-right: 30px;
+  border-left: solid 1px var(--box-shadow-color) ;
+  border-right: solid 1px var(--box-shadow-color);
 }
