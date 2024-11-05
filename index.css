@@ -30,7 +30,12 @@ body {
   height: 15%;
   padding: 13%;
   border-radius: 10px;
+  /* border: solid 1px white; */
   box-shadow: 4px 4px 10px var(--box-shadow);
+}
+
+.sidebar-button img:hover{
+  filter: brightness(70%);
 }
 
 .game-title {
@@ -67,10 +72,10 @@ body {
   display: flex;
   width: 120px;
   height: 60px;
-  justify-content: space-evenly;
+  justify-content: space-between;
   box-shadow: 4px 4px 10px var(--box-shadow);
   border-radius: 10px;
-  padding: 0.2em;
+  padding: 1em;
 }
 
 .user-name {
@@ -106,15 +111,52 @@ body {
   border-right: solid 1px var(--box-shadow-color);
 }
 
-.moves-container{
+.moves-container {
   display: flex;
   position: absolute;
   top: 45vh;
-  left:6vw;
+  left: 6vw;
   right: 4vw;
   font-size: 4rem;
   justify-content: space-between;
   align-items: center;
 }
 
+.buttons-container {
+  position: absolute;
+  display: flex;
+  top: 85vh;
+  left: 11vw;
+  right: 9vw;
+  justify-content: space-between;
+}
 
+.rock-button,
+.paper-button,
+.scissor-button {
+  font-size: 3rem;
+  background-color: black;
+  color: white;
+  /* border: solid 1px; */
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px var(--box-shadow);
+  
+}
+
+.rock-button,
+.paper-button {
+  padding: 0.3em 0.9em;
+  margin-right: 20px;
+}
+
+.scissor-button {
+  padding: 0.3em 0.5em;
+}
+
+button:hover{
+  color: var(--box-shadow-color);
+}
+
+button:active{
+  transform: scale(0.9);
+}
