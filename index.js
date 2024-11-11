@@ -30,6 +30,8 @@ function playGame(playerMove) {
     score.playerScore += 1;
   } else score.computerScore += 1;
 
+  renderScore(score);
+
 }
 
 
@@ -43,6 +45,12 @@ function renderMoves(playerMove, computerMove) {
   document.querySelector('.js-moves-container').innerHTML = movesHTML;
 }
 
-function renderScore(score) {
-  
+function renderScore() {
+  const scoreHTML = `
+  <p class="user-score">${score.playerScore}</p>
+  <p class="timer">00:00</p>
+  <p class="computer-score">${score.computerScore}</p>
+  `;
+
+  document.querySelector('.js-score-container').innerHTML = scoreHTML;
 }
