@@ -56,16 +56,29 @@
     <p class="computer-name">Pc</p>
   </div>
 
-  <div class="moves-container">
-    <img class="playerMove-image" src="./Assets/Rock-image.png" alt="Rock-image">
-    <p>VS</p>
-    <img class="computerMove-image" src="./Assets/Rock-image.png" alt="">
+  <div class="moves-container js-moves-container">
   </div>
 
   <div class="buttons-container">
-    <button class="rock-button">Rock</button>
-    <button class="paper-button">Paper</button>
-    <button class="scissor-button">Scissor</button>
+    <button class="
+      rock-button js-moveButton"
+      onclick="playGame('rock')">
+      Rock
+    </button>
+
+    <button class="
+      paper-button js-moveButton"
+      onclick="playGame('paper')">
+      Paper
+    </button>
+
+    <button class="
+      scissor-button js-moveButton"
+      onclick="playGame('scissor')">
+      Scissor
+    </button>
   </div>
+
+  <script src="./index.js"></script>
 </body>  
 </html>
