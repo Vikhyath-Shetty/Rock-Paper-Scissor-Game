@@ -3,9 +3,9 @@ let score = getScore() || {
   computerScore: 0,
 };
 
-const lastGameMoves = getLastMoves() || {
-  playerMove: "rock",
-  computerMove: "paper",
+let lastGameMoves = getLastMoves() || {
+  playerMove: 'rock',
+  computerMove: 'paper',
 };
 
 renderScore();
@@ -72,8 +72,25 @@ function getScore() {
 }
 
 function resetGame() {
-  localStorage.removeItem("gameScore");
-  localStorage.removeItem("lastMoves");
+  localStorage.clear();
+  setScore();
+  setLastMoves();
+  renderScore();
+  renderMoves(lastGameMoves.playerMove,lastGameMoves.computerMove);
+}
+
+function setScore(){
+  score = {
+    playerScore: 0,
+    computerScore: 0,
+  };
+}
+
+function setLastMoves(){
+  lastGameMoves = {
+    playerMove: 'rock',
+    computerMove: 'paper',
+  };
 }
 
 function saveLastMoves(playerMove, computerMove) {
@@ -87,12 +104,4 @@ function getLastMoves() {
 }
 
 
-function resetGame(){
-  localStorage.clear();
-  score = {
-    playerScore:0,
-    computerScore:0,
-  }
-  renderScore();
-  renderMoves();
-}
+
