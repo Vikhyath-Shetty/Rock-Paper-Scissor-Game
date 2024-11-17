@@ -1,9 +1,20 @@
-const score = {
+const score = getScore() || {
   playerScore: 0,
   computerScore: 0,
 };
 
-renderMoves();
+const lastGameMoves = getLastMoves() || {
+  playerMove: "rock",
+  computerMove: "paper",
+};
+
+renderScore();
+renderMoves(lastGameMoves.playerMove,lastGameMoves.computerMove);
+
+document.querySelector(".js-resetButton").addEventListener("click", () => {
+  localStorage.clear();
+  renderScore();
+});
 
 function getComputerMove() {
   const randomNumber = Math.random();
@@ -15,8 +26,6 @@ function getComputerMove() {
 
   return computerMove;
 }
-
-
 
 function playGame(playerMove) {
   const computerMove = getComputerMove();
@@ -30,10 +39,10 @@ function playGame(playerMove) {
     score.playerScore += 1;
   } else score.computerScore += 1;
 
-  renderScore(score);
-
+  renderScore();
+  saveScore();
+  saveLastMoves(playerMove, computerMove);
 }
-
 
 function renderMoves(playerMove, computerMove) {
   const movesHTML = `
@@ -42,7 +51,7 @@ function renderMoves(playerMove, computerMove) {
   <img class="computerMove-image" src="./Assets/${computerMove}-image.png" alt="${computerMove}-image">
   `;
 
-  document.querySelector('.js-moves-container').innerHTML = movesHTML;
+  document.querySelector(".js-moves-container").innerHTML = movesHTML;
 }
 
 function renderScore() {
@@ -52,5 +61,29 @@ function renderScore() {
   <p class="computer-score">${score.computerScore}</p>
   `;
 
-  document.querySelector('.js-score-container').innerHTML = scoreHTML;
+  document.querySelector(".js-score-container").innerHTML = scoreHTML;
+}
+
+
+function saveScore() {
+  localStorage.setItem("gameScore", JSON.stringify(score));
+}
+
+function getScore() {
+  return JSON.parse(localStorage.getItem("gameScore"));
+}
+
+function resetGame() {
+  localStorage.removeItem("gameScore");
+  localStorage.removeItem("lastMoves");
+}
+
+function saveLastMoves(playerMove, computerMove) {
+  lastGameMoves.computerMove = computerMove;
+  lastGameMoves.playerMove = playerMove;
+  localStorage.setItem("lastMoves", JSON.stringify(lastGameMoves));
+}
+
+function getLastMoves() {
+  return JSON.parse(localStorage.getItem("lastMoves"));
 }
