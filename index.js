@@ -1,4 +1,4 @@
-const score = getScore() || {
+let score = getScore() || {
   playerScore: 0,
   computerScore: 0,
 };
@@ -12,8 +12,7 @@ renderScore();
 renderMoves(lastGameMoves.playerMove,lastGameMoves.computerMove);
 
 document.querySelector(".js-resetButton").addEventListener("click", () => {
-  localStorage.clear();
-  renderScore();
+  resetGame();
 });
 
 function getComputerMove() {
@@ -38,7 +37,6 @@ function playGame(playerMove) {
   ) {
     score.playerScore += 1;
   } else score.computerScore += 1;
-
   renderScore();
   saveScore();
   saveLastMoves(playerMove, computerMove);
@@ -86,4 +84,15 @@ function saveLastMoves(playerMove, computerMove) {
 
 function getLastMoves() {
   return JSON.parse(localStorage.getItem("lastMoves"));
+}
+
+
+function resetGame(){
+  localStorage.clear();
+  score = {
+    playerScore:0,
+    computerScore:0,
+  }
+  renderScore();
+  renderMoves();
 }
