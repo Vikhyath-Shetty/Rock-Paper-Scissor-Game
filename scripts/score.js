@@ -1,4 +1,4 @@
-function renderScore(score) {
+export function renderScore(score) {
   const scoreHTML = `
   <p class="user-score">${score.playerScore}</p>
   <p class="timer">00:00</p>
@@ -8,16 +8,14 @@ function renderScore(score) {
   document.querySelector(".js-score-container").innerHTML = scoreHTML;
 }
 
-function saveScore(score) {
+export function saveScore(score) {
   localStorage.setItem("gameScore", JSON.stringify(score));
 }
 
-function getScore() {
+export function getScore() {
   return JSON.parse(localStorage.getItem("gameScore"));
 }
 
-function setScore(score) {
+export function setScore(score) {
   score.playerScore = score.computerScore = 0;
 }
-
-export { renderScore, saveScore, getScore, setScore };
