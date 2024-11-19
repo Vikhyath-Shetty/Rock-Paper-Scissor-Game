@@ -1,15 +1,14 @@
-let score = getScore() || {
-  playerScore: 0,
-  computerScore: 0,
-};
+import { score } from "./scripts/data.js";
+import { renderScore,saveScore,setScore } from "./scripts/score.js";
+
 
 let lastGameMoves = getLastMoves() || {
-  playerMove: 'rock',
-  computerMove: 'paper',
+  playerMove: "rock",
+  computerMove: "paper",
 };
 
-renderScore();
-renderMoves(lastGameMoves.playerMove,lastGameMoves.computerMove);
+renderScore(score);
+renderMoves(lastGameMoves.playerMove, lastGameMoves.computerMove);
 
 document.querySelector(".js-resetButton").addEventListener("click", () => {
   resetGame();
@@ -26,7 +25,7 @@ function getComputerMove() {
   return computerMove;
 }
 
-function playGame(playerMove) {
+ function playGame(playerMove) {
   const computerMove = getComputerMove();
   renderMoves(playerMove, computerMove);
   if (playerMove === computerMove) return;
@@ -37,10 +36,13 @@ function playGame(playerMove) {
   ) {
     score.playerScore += 1;
   } else score.computerScore += 1;
-  renderScore();
-  saveScore();
+  renderScore(score);
+  saveScore(score);
   saveLastMoves(playerMove, computerMove);
 }
+
+//this is to make playGame globally accessible by storing it in window object. By doing this we can use playgame within onclick="" attribute which isn't possible otherwise(as it is located within a module). 
+window.playGame = playGame;
 
 function renderMoves(playerMove, computerMove) {
   const movesHTML = `
@@ -52,45 +54,18 @@ function renderMoves(playerMove, computerMove) {
   document.querySelector(".js-moves-container").innerHTML = movesHTML;
 }
 
-function renderScore() {
-  const scoreHTML = `
-  <p class="user-score">${score.playerScore}</p>
-  <p class="timer">00:00</p>
-  <p class="computer-score">${score.computerScore}</p>
-  `;
-
-  document.querySelector(".js-score-container").innerHTML = scoreHTML;
-}
-
-
-function saveScore() {
-  localStorage.setItem("gameScore", JSON.stringify(score));
-}
-
-function getScore() {
-  return JSON.parse(localStorage.getItem("gameScore"));
-}
-
 function resetGame() {
   localStorage.clear();
-  setScore();
-  setLastMoves();
-  renderScore();
-  renderMoves(lastGameMoves.playerMove,lastGameMoves.computerMove);
+  setScore(score);
+  resetLastMoves();
+  renderScore(score);
+  renderMoves(lastGameMoves.playerMove, lastGameMoves.computerMove);
 }
 
-function setScore(){
-  score = {
-    playerScore: 0,
-    computerScore: 0,
-  };
-}
 
-function setLastMoves(){
-  lastGameMoves = {
-    playerMove: 'rock',
-    computerMove: 'paper',
-  };
+function resetLastMoves() {
+  lastGameMoves.playerMove = "rock";
+  lastGameMoves.computerMove = "paper";
 }
 
 function saveLastMoves(playerMove, computerMove) {
@@ -102,6 +77,4 @@ function saveLastMoves(playerMove, computerMove) {
 function getLastMoves() {
   return JSON.parse(localStorage.getItem("lastMoves"));
 }
-
-
 
