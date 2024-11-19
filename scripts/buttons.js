@@ -9,3 +9,4 @@ export function resetButton() {
   renderScore(score);
   renderMoves(lastGameMoves.playerMove, lastGameMoves.computerMove);
 }
+

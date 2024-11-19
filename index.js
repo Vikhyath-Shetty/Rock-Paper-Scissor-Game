@@ -37,5 +37,13 @@ document.querySelector(".js-resetButton").addEventListener("click", () => {
   resetButton();
 });
 
+document.querySelectorAll('.js-moveButton').forEach((button)=>{
+  button.addEventListener('click',()=>{
+    const audio = document.querySelector('.js-movesButtonAudio');
+    audio.currentTime = 0;
+    audio.play();
+  })
+})
+
 //this is to make playGame globally accessible by storing it in window object. By doing this we can use playgame within onclick="" attribute which isn't possible otherwise(as it is located within a module).
 window.playGame = playGame;
